@@ -1,10 +1,10 @@
 from entidade.organizador import Organizador
 
 class Evento:
-    def __init__(self, nome: str, codigo: int, lotaçao_max: int, faixa_etaria: int, open_bar: str, organizador: Organizador):
+    def __init__(self, nome: str, codigo: int, lotacao_max: int, faixa_etaria: int, open_bar: str, organizador: Organizador):
         self.__nome = nome 
         self.__codigo = codigo
-        self.__lotaçao_max = lotaçao_max
+        self.__lotacao_max = lotacao_max
         self.__faixa_etaria = faixa_etaria
         self.__open_bar = open_bar
         self.__participantes = [] 
@@ -20,8 +20,8 @@ class Evento:
         return self.__codigo
     
     @property
-    def lotaçao_max(self):
-        return self.__lotaçao_max
+    def lotacao_max(self):
+        return self.__lotacao_max
     
     @property
     def faixa_etaria(self):
@@ -47,9 +47,9 @@ class Evento:
     def codigo(self, codigo: int):
         self.__codigo = codigo
         
-    @lotaçao_max.setter
-    def lotaçao_max(self, lotaçao_max: int):
-        self.__lotaçao_max = lotaçao_max
+    @lotacao_max.setter
+    def lotacao_max(self, lotacao_max: int):
+        self.__lotacao_max = lotacao_max
         
     @faixa_etaria.setter
     def faixa_etaria(self, faixa_etaria: int):

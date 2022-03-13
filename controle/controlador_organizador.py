@@ -11,15 +11,21 @@ class ControladorOrganizador:
     def organizadores(self):
         return self.__organizadores
     
+    def abre_tela(self):
+        lista_opcoes = {1: self.inclui_organizador, 2: self.altera_organizador, 3: self.exclui_organizador, 4: self.lista_um_organizador, 5: self.lista_organizadores, 0: self.voltar}
+        continua = True
+        while continua:
+            lista_opcoes[self.__tela_organizador.tela_opçoes()]()
+    
     def pega_organizador_codigo(self, codigo_org):
         for organizer in self.__organizadores:
-            if organizer.codigo == codigo_org:
+            if (organizer.codigo == codigo_org):
                 return organizer
-            return None
+        return None
         
     def inclui_organizador(self):
         dados_organizador = self.__tela_organizador.pega_dados_organizador(self.__organizadores)
-        organizador = Organizador(dados_organizador['nome'], dados_organizador['cpf'], dados_organizador['endereço'], dados_organizador['idade'], dados_organizador['código'])
+        organizador = Organizador(dados_organizador["nome"], dados_organizador["cpf"], dados_organizador["endereco"], dados_organizador["idade"], dados_organizador["codigo"])
         self.__organizadores.append(organizador)
         
     def exclui_organizador(self):
@@ -43,12 +49,12 @@ class ControladorOrganizador:
             codigo_organizador = self.__tela_organizador.seleciona_organizador()
             organizador = self.pega_organizador_codigo(codigo_organizador)
             if organizador is not None:
-                novo_organizador = self.__tela_organizador.pega_dados_organizador(self.__organizadores)
-                organizador.nome = novo_organizador['nome']
-                organizador.cpf = novo_organizador['cpf']
-                organizador.endereço = novo_organizador['endereço']
-                organizador.idade = novo_organizador['idade']
-                organizador.codigo = novo_organizador['código']
+                novo_organizador = self.__tela_organizador.pega_dados_organizador()
+                organizador.nome = novo_organizador["nome"]
+                organizador.cpf = novo_organizador["cpf"]
+                organizador.endereco = novo_organizador["endereco"]
+                organizador.idade = novo_organizador["idade"]
+                organizador.codigo = novo_organizador["codigo"]
                 self.lista_organizadores()
             else: 
                 self.__tela_organizador.mostra_mensagem('Organizador inexistente!')
@@ -60,7 +66,7 @@ class ControladorOrganizador:
             codigo_organizador = self.__tela_organizador.seleciona_organizador()
             organizador = self.__tela_organizador.pega_organizador_codigo(codigo_organizador)
             if organizador is not None: 
-                self.__tela_organizador.mostra_organizador({'nome':organizador.nome, "cpf":organizador.cpf, "endereço":organizador.endereço, 'idade':organizador.idade, 'código':organizador.codigo})
+                self.__tela_organizador.mostra_organizador({"nome":organizador.nome, "cpf":organizador.cpf, "endereco":organizador.endereco, "idade":organizador.idade, "codigo":organizador.codigo})
             else:
                 self.__tela_organizador.mostra_organizador('Organizador inexistente!')
                 
@@ -69,17 +75,12 @@ class ControladorOrganizador:
             self.__tela_organizador.mostra_mensagem('Não foram cadastrados organizadores até o momento!')
         else: 
             for organizador in self.__organizadores:
-                self.__tela_organizador.mostra_organizador({'nome':organizador.nome, "cpf":organizador.cpf, "endereço":organizador.endereço, 'idade':organizador.idade, 'código':organizador.codigo})
+                self.__tela_organizador.mostra_organizador({"nome":organizador.nome, "cpf":organizador.cpf, "endereco":organizador.endereco, "idade":organizador.idade, "codigo":organizador.codigo})
                 
     def voltar(self):
         self.__controlador_sistema.abre_tela()
         
-    def abre_tela(self):
-        lista_opcoes = {1: self.inclui_organizador, 2: self.altera_organizador, 3: self.exclui_organizador, 4: self.lista_um_organizador, 5: self.lista_organizadores, 0: self.voltar}
-        
-        continua = True
-        while continua:
-            lista_opcoes[self.__tela_organizador.tela_opçoes()]()
+    
    
         
     

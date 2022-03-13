@@ -28,8 +28,7 @@ class TelaEventos:
         return opçao
     
     def pega_dados_evento(self, lista_eventos = []):
-        print('DADOS DO EVENTO \n')
-        #evento = {}
+        print('* DADOS DO EVENTO * \n')
         codigos = []
         
         for event in lista_eventos:
@@ -42,7 +41,6 @@ class TelaEventos:
                     raise ValueError
                 if len(nome) < 1:
                     raise ValueError
-                #evento['nome'] = nome
                 break
             except ValueError:
                 print('Digite um nome válido!! \n'
@@ -56,7 +54,6 @@ class TelaEventos:
                         raise ValueError
                     if int(codigo) in codigos:
                         raise Exception 
-                    #evento['codigo'] = codigo 
                     break 
                 except ValueError:
                     print('Digite um código válido!! \n'
@@ -65,11 +62,10 @@ class TelaEventos:
                     print('Esse código já foi cadastrado!')
                     
             while True:
-                lotaçao_max = input('Lotação máxima: ')
+                lotacao_max  = input('Lotação máxima: ')
                 try:
-                    if lotaçao_max.isnumeric == False:
+                    if lotacao_max .isnumeric == False:
                         raise ValueError
-                    #evento['lotação máxima'] = lotaçao_max
                     break
                 except ValueError:
                     print('Digita uma lotação válida!! \n'
@@ -80,7 +76,6 @@ class TelaEventos:
                 try:
                     if faixa_etaria.isnumeric == False:
                         raise ValueError
-                    #evento['faixa etária'] = faixa_etaria
                     break
                 except ValueError:
                     print('Digite uma faixa etária válida!! \n'
@@ -91,34 +86,42 @@ class TelaEventos:
                 try: 
                     if open_bar.isnumeric == True:
                         raise ValueError
-                    #evento['open_bar'] = open_bar
                     break
                 except ValueError:
                     print('Digite uma resposta válida!! \n'
                           "A opção correspondente deve ser 'S' (sim) ou 'N' (não)")
                     
-            return {"nome":nome, "codigo":codigo, "lotação maxima":lotaçao_max, "faixa etária":faixa_etaria, "open bar":open_bar}
+            return {"nome":nome, "codigo":codigo, "lotacao_max":lotacao_max , "faixa_etaria":faixa_etaria, "open_bar":open_bar}
         
     def mostra_evento(self, dados_evento):
-        print('-' *35)
-        print('DADOS DO EVENTO')
+        print('#' *35)
+        print('DADOS DO EVENTO:')
         print('Nome: {}'.format(dados_evento['nome']))
-        print('Código: {}'.format(dados_evento['código']))
-        print('Lotação Máxima: {}'.format(dados_evento['lotação máxima']))
-        print('Faixa Etária: {}'.format(dados_evento['faixa etária']))
-        print('Open bar: {}'.format(dados_evento['open bar'])) 
-        print('-' *35)            
+        print('Código: {}'.format(dados_evento['codigo']))
+        print('Lotação Máxima: {}'.format(dados_evento['lotacao_max']))
+        print('Faixa Etária: {}'.format(dados_evento['faixa_etaria']))
+        print('Open bar: {}'.format(dados_evento['open_bar'])) 
     
     def seleciona_evento(self):
         while True:
-            codigo = input('Código do evento: ')
-            try: 
-                if codigo.isnumeric() == False: 
-                    raise ValueError
-                return int(codigo)
-            except ValueError:
-                print('Digite um valor válido!! \n')
-                'Os códigos devem conter SOMENTE números'
+            codigo = input('Código - Evento: ')
+            # try: 
+            #     if codigo.isnumeric() == False: 
+            #         raise ValueError
+            #     return int(codigo)
+            # except ValueError:
+            #     print('Digite um valor válido!! \n')
+            #     'Os códigos devem conter SOMENTE números'
+            return codigo 
+        
+    def pega_evento_codigo(self):
+        codigo = input('Código do evento: ')
+        try:
+            if codigo.isnumeric() == False: 
+                raise ValueError
+        except ValueError:
+            print('Digite um código válido!! \n'
+                      'Os códigos devem conter SOMENTE números')
                 
     def mostra_mensagem(self, msg: str):
         print(msg)

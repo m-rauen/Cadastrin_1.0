@@ -19,33 +19,14 @@ class ControladorEventos:
     
     def pega_evento_codigo(self, codigo):
         for event in self.__eventos:
-            if event.codigo == codigo:
+            if (event.codigo == codigo):
                 return event
-            return None
+        return None
         
-    def lista_eventos(self):
-        if len(self.__eventos) < 1:
-            self.__tela_eventos.mostra_mensagem('Não foram cadastrados eventos até o momento!')
-        else: 
-            for festa in self.__eventos:
-                self.__tela_eventos.mostra_evento({'nome':festa.nome, 'código':festa.codigo, 'lotação máxima':festa.lotaçao_max, 'faixa etária':festa.faixa_etaria, 'open bar':festa.open_bar})
-                
-    def lista_um_evento(self):
-        if len(self.__eventos) < 1:
-            self.__tela_eventos.mostra_mensagem('Não foram cadastrados eventos até o momento')
-        else: 
-            codigo_evento = self.__tela_eventos.seleciona_evento()
-            event = self.pega_evento_codigo(codigo_evento)
-            if event is not None:
-                self.__tela_eventos.mostra_evento({'nome':event.nome, 'código':event.codigo, 'lotação máxima':event.lotaçao_max, 'faixa etária':event.faixa_etaria, 'open bar':event.open_bar})
-            else:
-                self.__tela_eventos.mostra_mensagem('Evento não encontrado!')
-    
     def adiciona_evento(self):
         dados_evento = self.__tela_eventos.pega_dados_evento()
-        new_evento = Evento(dados_evento["nome"], dados_evento["codigo"], dados_evento["lotação máxima"], dados_evento["faixa etária"], dados_evento["open bar"])
+        new_evento = Evento(dados_evento["nome"], dados_evento["codigo"], dados_evento["lotacao_max"], dados_evento["faixa_etaria"], dados_evento["open_bar"])
         self.__eventos.append(new_evento)
-        
         
     def exclui_evento(self):
         self.lista_eventos
@@ -72,10 +53,28 @@ class ControladorEventos:
                 novo_evento = self.__tela_eventos.pega_dados_eventos(self.__eventos)
                 event.nome = novo_evento['nome']
                 event.codigo = novo_evento['codigo']
-                event.lotaçao_max = novo_evento['lotaçao_max']
+                event.lotacao_max = novo_evento['lotacao_max']
                 event.faixa_etaria = novo_evento['faixa_etaria']
                 event.open_bar = novo_evento['open_bar']
-                self.lista_eventos
+                self.lista_eventos()
+            else:
+                self.__tela_eventos.mostra_mensagem('Evento inexistente!')
+    
+    def lista_eventos(self):
+        if len(self.__eventos) < 1:
+            self.__tela_eventos.mostra_mensagem('Não foram cadastrados eventos até o momento!')
+        else: 
+            for festa in self.__eventos:
+                self.__tela_eventos.mostra_evento({"nome":festa.nome, "código":festa.codigo, "lotacao_max":festa.lotacao_max, "faixa_etaria":festa.faixa_etaria, "open_bar":festa.open_bar})
+                
+    def lista_um_evento(self):
+        if len(self.__eventos) < 1:
+            self.__tela_eventos.mostra_mensagem('Não foram cadastrados eventos até o momento!')
+        else: 
+            codigo_evento = self.__tela_eventos.seleciona_evento()
+            event = self.pega_evento_codigo(codigo_evento)
+            if event is not None:
+                self.__tela_eventos.mostra_evento({"nome":event.nome, "código":event.codigo, "lotacao_max":event.lotacao_max, "faixa_etaria":event.faixa_etaria, "open_bar":event.open_bar})
             else:
                 self.__tela_eventos.mostra_mensagem('Evento inexistente!')
                 
@@ -86,3 +85,6 @@ class ControladorEventos:
     
     
         
+#adc_participante_evento
+#ai cria-se a conexão MVC
+#o participante vai ser adicionado na lista de participantes da classe eventos

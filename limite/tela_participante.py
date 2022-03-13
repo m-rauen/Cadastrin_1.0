@@ -14,7 +14,7 @@ class TelaParticipante:
         opçao = self.trata_opçoes('Digite a opção: ')    
         return opçao
     
-    def trata_opçoes(self, msg: str = '', inteiros_validos = []):
+    def trata_opcoes(self, msg: str = '', inteiros_validos = []):
         valor = input(msg)
         try:
             inteiro = int(valor)
@@ -28,8 +28,7 @@ class TelaParticipante:
                 print('Valores aceitos: {}'.format(inteiros_validos))
     
     def pega_dados_participante(self, lista_participantes = []):
-        print('DADOS DO PARTICIPANTE \n')
-        participante = {}
+        print('\n * DADOS DO PARTICIPANTE * \n')
         codigos = []
         
         for participant in lista_participantes:
@@ -42,7 +41,6 @@ class TelaParticipante:
                     raise ValueError
                 if len(nome) < 1:
                     raise ValueError
-                participante.update({'nome':nome})
                 break
             except ValueError:
                 print('Digite um nome válido!! \n'
@@ -54,18 +52,16 @@ class TelaParticipante:
             try:
                 if cpf.isnumeric() == False: 
                     raise ValueError
-                participante.update({'cpf':cpf})
                 break 
             except ValueError:
                 print('Digite um CPF válido!! \n'
                       'O CPF deve ter, precisamente, 11 caracteres numéricos')
                 
         while True:
-            endereço = input('Endereço: ')
+            endereço = input('Endereço: ').capitalize()
             try: 
                 if endereço.isascii() == False or endereço.isnumeric() == True:
                     raise ValueError
-                participante.update({'endereço':endereço})
                 break
             except ValueError:
                 print('Digite um endereço válido!! \n'
@@ -76,7 +72,6 @@ class TelaParticipante:
             try: 
                 if idade.isnumeric() == False:
                     raise ValueError
-                participante.update({'idade': idade})
                 break
             except ValueError:
                 print('Digite uma idade válida!! \n'
@@ -87,7 +82,6 @@ class TelaParticipante:
             try:
                 if vacina_3d.isnumeric() == True:
                     raise ValueError
-                participante.update({'vacina':vacina_3d})
                 break 
             except ValueError:
                 print('Digite uma resposta válida!! \n'
@@ -98,7 +92,6 @@ class TelaParticipante:
             try: 
                 if exame_pcr.isnumeric() == True:
                     raise ValueError
-                participante.update({'pcr':exame_pcr})
                 break 
             except ValueError:
                 print('Digite uma resposta válida!! \n'
@@ -111,7 +104,6 @@ class TelaParticipante:
                     raise ValueError
                 if int(codigo) in codigos:
                     raise Exception 
-                participante.update({'codigo':codigo})
                 break 
             except ValueError:
                 print('Digite um código válido!! \n'
@@ -119,10 +111,10 @@ class TelaParticipante:
             except Exception:
                 print('Esse código já foi cadastrado')
         
-        return participante
+        return {"nome":nome, "cpf":cpf, "endereço":endereço, "idade": idade, "vacina":vacina_3d, "pcr":exame_pcr, "codigo":codigo}
         
     def mostra_participante(self, dados_participante):
-        print('-' *35)
+        print('#' *35)
         print('DADOS DO PARTICIPANTE: \n')
         print('Nome: ', dados_participante["nome"])
         print('CPF: {}'.format(dados_participante["cpf"]))
@@ -131,8 +123,7 @@ class TelaParticipante:
         print('Vacina - 3 doses: {}'.format(dados_participante["vacina"])) 
         print('Exame PCR negativo: {}'.format(dados_participante["pcr"]))
         print('Código: {}'.format(dados_participante["codigo"]))
-        print('-' *35)
-                
+        
     def pega_participante_codigo(self):
         codigo = input('Código do participante: ')
         try:
@@ -141,7 +132,11 @@ class TelaParticipante:
         except ValueError:
             print('Digite um código válido!! \n'
                       'Os códigos devem conter SOMENTE números')
-        
+            
+    def seleciona_participante(self):
+        codigo = input('Código - Participante: ')
+        return codigo
+            
     def mostra_mensagem(self, msg: str):
         print(msg)
                 
